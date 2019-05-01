@@ -12,6 +12,6 @@ class CashRegister
   end
   
   def apply_discount
-    total *= (1 - self.discount)
+    self.total *= (1 - self.discount)
   end
 end
