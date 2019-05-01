@@ -13,7 +13,6 @@ class CashRegister
   def add_item(item_name, item_cost, quantity = 1)
     self.previous_items = self.items
     self.previous_total = self.total
-    
     self.total += (item_cost * quantity)
     quantity.times{ self.items << item_name }
   end
