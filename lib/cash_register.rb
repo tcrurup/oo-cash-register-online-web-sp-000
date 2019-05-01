@@ -2,7 +2,7 @@ require 'pry'
 
 class CashRegister
   
-  attr_accessor :total, :discount, :items, :last_transaction 
+  attr_accessor :total, :discount, :items, :previous_total, :previous_items 
   
   def initialize(employee_discount = 0)
     @total = 0
@@ -11,8 +11,9 @@ class CashRegister
   end
   
   def add_item(item_name, item_cost, quantity = 1)
-    #Save the current instance to the last_transaction variable 
-    self.last_transaction = self 
+    self.previous_items = self.items
+    self.previous_total = self.total
+    
     self.total += (item_cost * quantity)
     quantity.times{ self.items << item_name }
   end
@@ -27,8 +28,7 @@ class CashRegister
   end
   
   def void_last_transaction
-    self.total = self.last_transaction.total
-    self.items = self.last_transaction.items
+    self.total = self.previous_total
+    self.items = self.previous_items
   end
-  
 end
